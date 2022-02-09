@@ -10,9 +10,27 @@ const closeBtn = document.querySelector('.close');
 const errorMsg = document.querySelector('error-text');
 const popup = document.querySelector('.popup');
 
+const inputData = [username, pass, secondPass, email];
+
+const checkForm = (input) => {
+	input.forEach((el) => {
+		if (el.value === '') {
+			console.log('błąd');
+		} else {
+			console.log('ok');
+		}
+	});
+};
+
+sendBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+
+	checkForm(inputData);
+});
+
 clearBtn.addEventListener('click', (e) => {
 	e.preventDefault();
-    [username, pass, secondPass, email].forEach( el => {
-		el.value = ''
+	inputData.forEach((el) => {
+		el.value = '';
 	});
 });
