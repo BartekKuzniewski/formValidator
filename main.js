@@ -7,17 +7,31 @@ const clearBtn = document.querySelector('.clear');
 const sendBtn = document.querySelector('.send');
 const closeBtn = document.querySelector('.close');
 
-const errorMsg = document.querySelector('error-text');
+// const errorMsg = document.querySelector('error-text');
 const popup = document.querySelector('.popup');
 
 const inputData = [username, pass, secondPass, email];
 
+
+const showError = (input, msg) => {
+    const formBox = input.parentElement;
+    const errorMsg = formBox.querySelector('.error-text')
+
+    formBox.classList.add('error');
+    errorMsg.textContent = msg;
+}
+
+const clearError = (input) => {
+    const formBox = input.parentElement;
+    formBox.classList.remove('error')
+}
+
 const checkForm = (input) => {
 	input.forEach((el) => {
 		if (el.value === '') {
-			console.log('błąd');
+			showError(el, el.placeholder)
 		} else {
-			console.log('ok');
+			clearError(el)
 		}
 	});
 };
