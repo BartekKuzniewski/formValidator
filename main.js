@@ -78,5 +78,6 @@ clearBtn.addEventListener('click', (e) => {
 
 	inputData.forEach((el) => {
 		el.value = '';
+		clearError(el)
 	});
 });
