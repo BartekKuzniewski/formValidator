@@ -22,35 +22,44 @@ const showError = (input, msg) => {
 
 const clearError = (input) => {
 	const formBox = input.parentElement;
-
-	formBox.classList.remove('error')
-}
+	formBox.classList.remove('error');
+};
 
 const checkForm = (input) => {
 	input.forEach((el) => {
 		if (el.value === '') {
 			showError(el, el.placeholder);
-
 		} else {
-			clearError(el)
+			clearError(el);
 		}
 	});
 };
 
 const checkLength = (input, minValue) => {
-		if(input.value.length < minValue){
-			showError(input, `${input.previousElementSibling.innerText.slice(0, -1)} musi składać się z ${minValue} znaków`)
-		}
-}
+	if (input.value.length < minValue) {
+		showError(
+			input,
+			`${input.previousElementSibling.innerText.slice(
+				0,
+				-1
+			)} musi składać się z ${minValue} znaków`
+		);
+	}
+};
 
-
+const checkPasswords = (password, secondPassword) => {
+	if (password.value !== secondPassword.value) {
+		showError(secondPassword, `Hasła różnią się od siebie`);
+	}
+};
 
 sendBtn.addEventListener('click', (e) => {
 	e.preventDefault();
 
 	checkForm(inputData);
-	checkLength(username, 5)
-	checkLength(pass, 8)
+	checkLength(username, 5);
+	checkLength(pass, 8);
+	checkPasswords(pass, secondPass);
 });
 
 clearBtn.addEventListener('click', (e) => {
