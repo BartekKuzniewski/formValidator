@@ -7,7 +7,7 @@ const clearBtn = document.querySelector('.clear');
 const sendBtn = document.querySelector('.send');
 const closeBtn = document.querySelector('.close');
 
-// const errorMsg = document.querySelector('error-text');
+
 const popup = document.querySelector('.popup');
 
 const inputData = [username, pass, secondPass, email];
@@ -53,13 +53,28 @@ const checkPasswords = (password, secondPassword) => {
 	}
 };
 
-const chechMail = (email) => {
+const checkMail = (email) => {
 	const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,3}))$/
 
 	if(re.test(email.value)) {
 		clearError(email)
 	} else {
 		showError(email, 'E-mail jest niepoprawny!')
+	}
+}
+
+const countErrors = () => {
+	const allInputs = document.querySelectorAll('.form-box');
+	let counter = 0;
+
+	allInputs.forEach(el => {
+		if(el.classList.contains('error')) {
+			counter++
+		}
+	})
+
+	if(counter === 0){
+		popup.classList.add('show-popup')
 	}
 }
 
@@ -70,7 +85,8 @@ sendBtn.addEventListener('click', (e) => {
 	checkLength(username, 5);
 	checkLength(pass, 8);
 	checkPasswords(pass, secondPass);
-	chechMail(email)
+	checkMail(email);
+	countErrors();
 });
 
 clearBtn.addEventListener('click', (e) => {
